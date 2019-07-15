@@ -1,0 +1,26 @@
+export const GlobalVariable = Object.freeze({
+
+    BASE_API_URL: 'https://orsapi-staging.epreop.com/',
+    //BASE_API_URL: 'https://localhost:5001/',
+    //BASE_API_URL: 'http://localhost:62307/',
+    //BASE_API_URL: 'http://192.168.1.187:8085/',
+    PowerBiGroupId: '7aa35e2c-b916-484f-8014-040dd482530b',
+    AdverseEventsReportId: 'c507ac1c-d04d-4552-992e-29bd05b9202d',
+    AdverseEventsProviderReportId: '5d9eaa01-47e7-4869-b8a7-a18fb5659a4b',
+    DashboardReportId: 'eacf58e2-6715-44dc-b8ef-5006d6cafcee',
+    ProviderDataIntegrationReportId: '577d23b1-9dea-4bd6-8efc-36bd80adb1cd',
+    ProviderProviderDataIntegrationReportId: '00a48aaf-9d0f-446d-a782-16642847cb82',
+    ProviderPerformanceReportId: '9130b99f-3274-41c1-98cc-6e017bfb0ed0',
+    PracticeDataIntegrationReportId: 'f71bae17-527a-4c14-853a-fbb624ff62e6',
+    TinPerformanceSummaryReportId: '827eece1-4f75-4b26-909a-a76e9f6a218d',
+    FileLogReportId: '25c6d117-36e2-4c8f-8c61-d7d78af3925d',
+    ProviderSummaryReportId: 'a1339211-1da8-45ac-9b8e-1ff2ea418815',
+    PatientDemographics: '05270ca6-ebb4-4414-92cb-87dec9bbd532',
+    ProviderDemographicSummary: 'bcc64c4c-e5e7-48bf-baab-b32ca62104ec',
+    ProviderDashboard: '4eefb3ac-5375-4c2c-99d9-3528d6d130ae',
+    CaseList: '10d85ba6-f388-4ba5-a773-2bab93394967',
+    ProviderCaseList: '2cd45924-a29e-4c59-82f2-d16316728d7f',
+    PowerBiOrganizationId: '5103b0e4-1f3c-4402-b635-e1b188901332',
+    ReportYear: '2018',
+    PowerBiRefreshTokenTime:29
+});

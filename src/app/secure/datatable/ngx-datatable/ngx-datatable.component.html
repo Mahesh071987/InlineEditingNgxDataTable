@@ -1,0 +1,95 @@
+<div>
+  <h3 class="card-title">Inline Editing</h3>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="showMessage">
+  {{message}}
+</div>
+<div class="card-body row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a class="pointer" (click)="addRow()" [ngStyle]="{'pointer-events': !isAdd ? 'none' : ''}"><span
+            class="fas fa-plus-circle fa-2x"></span></a>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <ngx-datatable #table class="bootstrap no-detail-row material server-scrolling-demo" [rows]="rows"
+          [columnMode]="'flex'" pagging="false" [footerHeight]="50" [limit]="1000" [headerHeight]="headerHeight"
+          [rowHeight]="'auto'" [loadingIndicator]="isLoading">
+
+          <ngx-datatable-column [flexGrow]="9">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <b><label>Subject</label></b> <br>
+                  <span *ngIf="!editing[rowIndex + '-Subject']">
+                    {{ row.SubjectId + ' - ' + row.Subject}}
+                  </span>
+                  <ng-multiselect-dropdown [placeholder]="'Select Subject'"
+                    *ngIf="editing[rowIndex + '-Subject']" [data]="SubjectList"
+                    [(ngModel)]="selectedItems" [settings]="config"
+                    (onDeSelect)="OnItemDeSelectSubject($event)" style="width:100%" FormControlName="selectedItems"
+                    [ngModelOptions]="{standalone: true}">
+                  </ng-multiselect-dropdown>
+                  <span class="text-danger" *ngIf="editing[rowIndex+ '-Subject'] && requiredImprovementActivity" style="float: left;
+                   clear: left;">This field is required</span>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-3">
+                  <b><label>Start Date</label></b> <br>
+                  <span   *ngIf="!editing[rowIndex + '-startDate']">
+                    {{row.startDate | date: 'MM/dd/yyyy'}}
+                  </span>
+                  <input type="date" class="form-control" width="160px" *ngIf="editing[rowIndex+ '-startDate']"
+                    id="startDate" name="startDate" min="{{year}}-01-01" max="{{year}}-12-31"
+                    [ngModel]="row.startDate | date:'yyyy-MM-dd'" (ngModelChange)="row.startDate = $event"
+                    [value]="row.startDate | date:'yyyy-MM-dd'" />
+                </div>
+                <div class="col-md-3">
+                  <b><label>End Date</label></b> <br>
+                  <span   *ngIf="!editing[rowIndex + '-endDate']">
+                    {{row.endDate | date: 'MM/dd/yyyy'}}
+                  </span>
+                  <input type="date" class="form-control" width="160px" *ngIf="editing[rowIndex+ '-endDate']"
+                    id="endDate" name="endDate" min="{{year}}-01-01" max="{{year}}-12-31"
+                    [ngModel]="row.endDate | date:'yyyy-MM-dd'" (ngModelChange)="row.endDate = $event"
+                    [value]="row.endDate | date:'yyyy-MM-dd'" />
+                     <span class="text-danger" *ngIf="editing[rowIndex+ '-endDate'] && isEndDateValid" style="float: left;
+                     clear: left;">End date should not be less than start date</span>
+                </div>
+                <div class="col-md-3">
+                  <b><label>Documentation Date</label></b><br>
+                  <span   *ngIf="!editing[rowIndex + '-documentationDate']">
+                    {{row.documentationDate | date: 'MM/dd/yyyy'}}
+                  </span>
+                  <input type="date" class="form-control" width="160px" *ngIf="editing[rowIndex+ '-documentationDate']"
+                    id="documentationDate" name="documentationDate"
+                    [ngModel]="row.documentationDate | date:'yyyy-MM-dd'"
+                    (ngModelChange)="row.documentationDate = $event"
+                    [value]="row.documentationDate | date:'yyyy-MM-dd'" />
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column [flexGrow]="1">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <i class="fa-lg mr-2 far fa-edit pointer" *ngIf="!this.isEditable[rowIndex]"
+                [ngStyle]="{'pointer-events': isRowEditing ? 'none' : ''}"
+                (click)="isRowEditing=true; EnabledEditMode(rowIndex, row);"></i>
+              <i class="fas fa-save fa-lg mr-2 pointer" *ngIf="this.isEditable[rowIndex]" title="Save"
+                (click)="isRowEditing=false; validateImprovementActivity($event, 'improvementActivityName', 'documentationDate', 'startDate' , 'endDate' , 'comment', row, rowIndex) ;"></i>
+              <i class="fa-lg mr-2 far fa-trash-alt pointer" *ngIf="!this.isEditable[rowIndex]"
+                (click)="delete(row, rowIndex)"
+                [ngStyle]="{'pointer-events': isRowEditing && !this.isEditable[rowIndex] ? 'none' : ''}"></i>
+              <i class="fa-lg mr-2 far fa-window-close pointer" (click)="Cancel(rowIndex, row)"
+                *ngIf="this.isEditable[rowIndex]" title="Cancel"></i>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
