@@ -134,7 +134,7 @@ export class NgxDatatableComponent implements OnInit {
       this.rows = [...this.rows];  // update the ngx-datatable.
       this.selectedItems = [];  // set the slected items empty.
       this.isEditable[0] = true; // make the 0th row editable.
-      this.rows[0]['documentationDate'] = this.ddValue; // this us used for set the todays date.
+      this.rows[0]['documentationDate'] = this.ddValue; // this is used for set the todays date.
       this.IsEditRow(0, true); // Call a function for set the row is editable.
       this.isAdd = false;   // flag for add button click event.
       this.isRowEditing = true; // editable row is in edit mode.
